@@ -112,7 +112,7 @@ export default class TimeSpinner extends Component {
       Math.floor(
         (this.refs[_type].refs.wrap.scrollTop - SCROLL_AJUST_VALUE) / 32 + 3
       ),
-      59
+      _type === 'hours' ? 23 : 59
     );
     this.handleChange(_type, value);
   }
