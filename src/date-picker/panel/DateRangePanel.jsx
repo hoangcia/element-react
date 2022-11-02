@@ -174,13 +174,15 @@ export default class DateRangePanel extends PopperBase {
 
   get minVisibleTime() {
     let { minDate } = this.state
-    return minDate ? formatDate(minDate, 'HH:mm:ss') : ''
+    const isShowSeconds = !this.props.format ? true : (this.props.format.indexOf('s') !== -1 || this.props.format.indexOf('ss') !== -1);
+    return minDate ? formatDate(minDate, isShowSeconds ? 'HH:mm:ss': 'HH:mm') : '';
   }
 
   get maxVisibleTime() {
     let { maxDate, minDate } = this.state
     let d = maxDate || minDate
-    return d ? formatDate(d, 'HH:mm:ss') : ''
+    const isShowSeconds = !this.props.format ? true : (this.props.format.indexOf('s') !== -1 || this.props.format.indexOf('ss') !== -1);    
+    return d ? formatDate(d, isShowSeconds ? 'HH:mm:ss': 'HH:mm') : ''
   }
 
   get btnDisabled() {
@@ -374,6 +376,7 @@ export default class DateRangePanel extends PopperBase {
                                 }
                               }
                               onCancel={() => this.setState({ minTimePickerVisible: false })}
+                              format={this.props.format}
                             />
                           </MountBody>
                         )
@@ -424,6 +427,7 @@ export default class DateRangePanel extends PopperBase {
                                 }
                               }
                               onCancel={() => this.setState({ maxTimePickerVisible: false })}
+                              format={this.props.format}
                             />
                           </MountBody>
                         )

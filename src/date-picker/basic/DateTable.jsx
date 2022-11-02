@@ -327,6 +327,9 @@ export default class DateTable extends Component {
           onPick({ minDate: toDate(newDate), maxDate: null }, false)
         } else if (newDate >= minDate) {
           rangeState.selecting = false;
+          newDate.setHours(23);
+          newDate.setMinutes(59);
+          newDate.setSeconds(59);          
           onPick({ minDate, maxDate: toDate(newDate) }, true)
         }
       } else {
