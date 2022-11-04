@@ -58,6 +58,7 @@ export default class BasePicker extends Component {
       isShowTrigger: PropTypes.bool,
       isReadOnly: PropTypes.bool,
       isDisabled: PropTypes.bool,
+      isClearable: PropTypes.bool,
       placeholder: PropTypes.string,
       onFocus: PropTypes.func,
       onBlur: PropTypes.func,
@@ -68,6 +69,7 @@ export default class BasePicker extends Component {
         PropTypes.instanceOf(Date),
         PropTypes.arrayOf(PropTypes.instanceOf(Date))
       ]),
+      inputClassname: PropTypes.string
     }
   }
 
@@ -77,6 +79,8 @@ export default class BasePicker extends Component {
       // (thisReactElement)=>Unit
       onFocus() { },
       onBlur() { },
+      inputClassname: null,
+      isClearable: true
     }
   }
 
@@ -266,7 +270,7 @@ export default class BasePicker extends Component {
   }
 
   render() {
-    const { isReadOnly, placeholder, isDisabled, className } = this.props;
+    const { isReadOnly, placeholder, isDisabled, className, inputClassname } = this.props;
     const { pickerVisible, value, text, isShowClose } = this.state;
 
     const createIconSlot = () => {
@@ -338,7 +342,7 @@ export default class BasePicker extends Component {
           func={this.handleClickOutside.bind(this)} />
 
         <Input
-          className={this.classNames(`el-date-editor el-date-editor--${this.type}`)}
+          className={this.classNames(`el-date-editor el-date-editor--${this.type}`, inputClassname)}
           readOnly={isReadOnly}
           disabled={isDisabled}
           type="text"

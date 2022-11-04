@@ -123,11 +123,13 @@ export interface BasePickerProps {
   isShowTrigger: boolean,
   isReadOnly: boolean,
   isDisabled: boolean,
+  isClearable: boolean,
   placeholder: ?string,
   onFocus: ?()=>void,
   onBlur: ?()=>void,
   onChange: ?(type: ValidDateType)=>void,
-  value: Date | Date[]
+  value: Date | Date[],
+  inputClassname: ?string
 }
 
 export type DatePickerProps =  BasePickerProps & {

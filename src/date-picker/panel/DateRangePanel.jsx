@@ -69,6 +69,7 @@ export default class DateRangePanel extends PopperBase {
       // ([value1, value2]|null, isKeepPanel)=>()
       onPick: PropTypes.func.isRequired,
       isShowTime: PropTypes.bool,
+      isClearable: PropTypes.bool,
       // Array[{text: String, onClick: (picker)=>()}]
       shortcuts: PropTypes.arrayOf(
         PropTypes.shape({
@@ -297,7 +298,7 @@ export default class DateRangePanel extends PopperBase {
   }
 
   render() {
-    const { shortcuts, disabledDate, firstDayOfWeek, isShowTime } = this.props
+    const { shortcuts, disabledDate, firstDayOfWeek, isShowTime, isClearable } = this.props
     const { date, rangeState, minDate, maxDate, minTimePickerVisible, maxTimePickerVisible, minPickerWidth, maxPickerWidth } = this.state
     const rightDate = this.rightDate
 
@@ -492,9 +493,13 @@ export default class DateRangePanel extends PopperBase {
         {
           isShowTime && (
             <div className="el-picker-panel__footer">
+              {
+                isClearable && 
               <a
                 className="el-picker-panel__link-btn"
-                onClick={()=> this.handleClear()}>{ Locale.t('el.datepicker.clear') }</a>
+                onClick={()=> this.handleClear()}>{ Locale.t('el.datepicker.clear') }
+              </a>
+              }
               <button
                 type="button"
                 className="el-picker-panel__btn"
